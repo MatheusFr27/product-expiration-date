@@ -56,7 +56,18 @@
         </div>
 
         <div class="field-group validity-group">
-          <label for="validity-value">Período de validação</label>
+          <div class="label-row">
+            <label for="validity-value">Período de validação</label>
+            <button
+              id="validity-info"
+              class="info-button"
+              type="button"
+              aria-label="Saiba como dias e meses são calculados"
+              aria-controls="validity-info-modal"
+              aria-expanded="false"
+              title="Como funciona o cálculo"
+            >!</button>
+          </div>
 
           <div class="validity-row">
             <input
@@ -90,8 +101,34 @@
       </form>
     </section>
 
+    <div id="validity-info-modal" class="modal-backdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <h2 id="modal-title">Dias e meses podem gerar datas diferentes</h2>
+          <button id="modal-close" class="modal-close" type="button" aria-label="Fechar explicação" title="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-content">
+          <p>Isso acontece porque <strong>dias</strong> representam uma quantidade exata de dias corridos, enquanto <strong>meses</strong> representam meses do calendário. Como os meses possuem quantidades diferentes de dias, os resultados podem não coincidir.</p>
+
+          <p class="example-label">Exemplo:</p>
+          <div class="example-list">
+            <p>Data base <strong>24 Agosto de 2026</strong></p>
+            <p><strong>90 dias</strong> <strong>22 Novembro de 2026</strong></p>
+            <p><strong>3 meses</strong> <strong>24 Novembro de 2026</strong></p>
+          </div>
+
+          <p>Portanto, os dois cálculos estão corretos: <strong>90 dias não é necessariamente igual a 3 meses</strong>.</p>
+        </div>
+      </section>
+    </div>
+
     <footer class="page-footer" aria-label="Informações do sistema">
-      <span>V 0.0.1</span>
+      <span>V 0.1.0</span>
       <span>Desenvolvido por Matheus E. França</span>
     </footer>
 
