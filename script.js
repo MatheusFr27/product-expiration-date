@@ -4,6 +4,9 @@ const validityInput = document.getElementById("validity-value");
 const validityUnit = document.getElementById("validity-unit");
 const resultDate = document.getElementById("result-date");
 const dateHint = document.getElementById("date-hint");
+const validityInfo = document.getElementById("validity-info");
+const validityInfoModal = document.getElementById("validity-info-modal");
+const modalClose = document.getElementById("modal-close");
 
 const monthNames = [
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -149,6 +152,20 @@ function toggleTodayMode() {
   calculate();
 }
 
+function openInfoModal() {
+  validityInfoModal.hidden = false;
+  validityInfo.setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
+  modalClose.focus();
+}
+
+function closeInfoModal() {
+  validityInfoModal.hidden = true;
+  validityInfo.setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+  validityInfo.focus();
+}
+
 function initialize() {
   const today = new Date();
   baseDateInput.value = toDateInputValue(today);
@@ -165,5 +182,13 @@ baseDateInput.addEventListener("input", calculate);
 baseDateInput.addEventListener("change", calculate);
 validityInput.addEventListener("input", calculate);
 validityUnit.addEventListener("change", calculate);
+validityInfo.addEventListener("click", openInfoModal);
+modalClose.addEventListener("click", closeInfoModal);
+validityInfoModal.addEventListener("click", (event) => {
+  if (event.target === validityInfoModal) closeInfoModal();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !validityInfoModal.hidden) closeInfoModal();
+});
 
 initialize();
